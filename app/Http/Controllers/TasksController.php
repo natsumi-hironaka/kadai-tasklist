@@ -94,10 +94,20 @@ class TasksController extends Controller
     public function edit($id)
     {
        $kadaitasklist = Kadaitasklist::find($id);
-
-        return view('kadaitasklists.edit', [
+       
+       if (\Auth::user()->id === $kadaitasklist->user_id) {
+           
+            return view('kadaitasklists.edit', [
             'kadaitasklist' => $kadaitasklist,
         ]);
+       }
+       
+       else {
+           return redirect('/');
+       }
+
+        
+       
     }
 
     /**
